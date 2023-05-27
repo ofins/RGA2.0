@@ -1,0 +1,80 @@
+$border-radius-container: 30px;
+
+.home--container {
+    display:grid;
+    place-items: center;
+    height:100vh;
+    width:100%;
+    background-color: var(--home-bg);
+}
+
+.home--NewGameContainer {
+    background-color: var(--white);
+    width:65%;
+    height:70%;
+    border-radius: $border-radius-container;
+    box-shadow: var(--box-shadow);
+        form {
+            display:flex;
+            flex-direction: column;
+            place-items: center;
+            justify-content: space-evenly;
+            height:100%;
+        }
+        h3 {
+            font-size: 3rem;
+            font-weight:700;
+            color: var(--purple);
+            margin-top:-5%;
+        }
+        // * {
+        //     border: 1px solid red;
+        // }
+        .home--secA {
+            margin-top:-5%;
+            height:20%;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .inputBox {
+            background: #F5F5F5;
+            box-shadow: var(--box-shadow-input);
+            border-radius: var(--border-radius-input);
+            height:40px;
+            border-style:none;
+            text-align: center;
+            font-size:22px;
+            letter-spacing: 0.2rem;
+        }
+        .home--teamInputContainer {
+            display:flex;
+            justify-content: space-between;
+        }
+        button {
+            cursor:pointer;
+            width:15%;
+            height:7%;
+            border-radius: var(--border-radius-input);
+            font-size:22px;
+            font-weight:600;
+            background-color: var(--yellow);
+            border-style:none;
+            color: var(--purple);
+            letter-spacing: 0.2rem;
+        }
+}
+
+.inputBox.title{
+    width:100%;
+}
+
+.inputBox.teamInputs {
+    width:45%;
+}
+
+.inputBox::placeholder {
+    text-align: center;
+    font-size:22px;
+    letter-spacing: 0.2rem;
+}

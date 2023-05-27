@@ -1,0 +1,47 @@
+.rosterLayout--container {
+  display: flex;
+}
+
+.rosterLayout--nav {
+  height: 100vh;
+  width: 25%;
+  background-color: var(--roster-bg);
+  overflow-y: scroll;
+  padding-top: 3%;
+}
+
+.rosterLayout--itemContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  padding-left: 5%;
+  padding-top: 2%;
+}
+
+.rosterLayout--item {
+  font-size: 24px;
+  text-decoration: none;
+  color: var(--black);
+  margin: 1% 1% 1% 0;
+  background-color: white;
+}
+
+.rosterLayout--navBtns {
+  height: 7%;
+  display: flex;
+  place-items: center;
+  padding-inline: 5%;
+}
+.rosterLayout--navBtns button {
+  height: 70%;
+  border-radius: 30px;
+  background-color: var(--yellow);
+  border-style: none;
+  font-size: 18px;
+  font-weight: 700;
+  margin-inline: 5px;
+  color: var(--black);
+}
+.rosterLayout--navBtns #newTeamBtn {
+  width: 30%;
+}/*# sourceMappingURL=RosterLayout.css.map */

@@ -1,0 +1,8 @@
+.navbar--links {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.navbar--links:hover, .navbar--logo:hover {
+  color: var(--yellow);
+}/*# sourceMappingURL=navbar.css.map */
