@@ -16,11 +16,9 @@ function Modal_2({ handleClose }) {
     // DISPLAYING PLAYER LIST **
     //get players info from Redux state
     const teams = useSelector(state => state.teamReducer);
-    console.log(teams)
 
     //check which team is currently selected
     const selectedTeam = useSelector(state => state.selectedTeamReducer);
-    console.log(selectedTeam);
 
     //EDITING PLAYER INFO**
     //create state to hold updated info for editing player name/number
@@ -91,17 +89,37 @@ function Modal_2({ handleClose }) {
         })
     }
 
+    //ADD NEW PLAYER **
+
+    //temporary create new player name saved here
+    const [newPlayer, setNewPlayer] = useState({
+        status: false,
+        teamName: selectedTeam,
+        playerNumber: null,
+        playerName: ''
+    });
+
+    const handleAddPlayer = () => {
+        dispatch(actions.addPlayer(newPlayer))
+        setNewPlayer({
+            status: false,
+            teamName: selectedTeam,
+            playerNumber: null,
+            playerName: ''
+        })
+    }
+
 
 
     return (
         <>
             <Modal.Header closeButton>
-                <Modal.Title>Edit Team</Modal.Title>
+                <Modal.Title>Edit Team: {selectedTeam}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Table striped bordered hover variant="dark">
                     <thead>
-                        <tr>
+                        <tr className="text-center">
                             <th>#</th>
                             <th>Player Name</th>
                             <th>Edit</th>
@@ -112,28 +130,31 @@ function Modal_2({ handleClose }) {
                         {playerList}
                     </tbody>
                 </Table>
-                {/* {updatePlayer.status ?
-                    <div>
-                        <input type="text" value={updatePlayer.playerName} onChange={e => setUpdatePlayer({
-                            ...updatePlayer,
-                            newPlayerName: e.target.value
-                        })} placeholder='edit player name' />
-                        <input type="text" value={updatePlayer.playerNumber} onChange={e => setUpdatePlayer({
-                            ...updatePlayer,
-                            newPlayerNumber: e.target.value
-                        })} placeholder='edit player number' />
-                        <button onClick={handleUpdate}>Update</button>
-                    </div>
-                    : null
-                } */}
+                {newPlayer.status ?
+                    <>
+                        <input className="mx-1" type="text" autoFocus onChange={e => setNewPlayer({
+                            ...newPlayer,
+                            playerNumber: e.target.value
+                        })} placeholder='24' style={{ width: '50px', textAlign: 'center' }} />
+                        <input className="mx-1" type="text" onChange={e => setNewPlayer({
+                            ...newPlayer,
+                            playerName: e.target.value
+                        })} placeholder='Kevin Durant' style={{ width: '200px', textAlign: 'center' }} />
+                        <Button onClick={handleAddPlayer} size="sm" variant="secondary">Add</Button>
+                    </>
+                    : null}
+
             </Modal.Body>
             <Modal.Footer>
+                <Button onClick={() => setNewPlayer({
+                    ...newPlayer,
+                    status: true
+                })} variant="primary">
+                    Add Player
+                </Button>
                 <Button variant="secondary" onClick={() => handleClose(2)}>
                     Close
                 </Button>
-                {/* <Button variant="primary">
-                    Save Changes
-                </Button> */}
             </Modal.Footer>
         </>
     )

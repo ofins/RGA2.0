@@ -29,8 +29,6 @@ const teamReducer = (state = [
                         name: action.payload.playerName,
                         number: action.payload.playerNumber,
                     })
-                    console.log('player added')
-                    console.log(state)
                 }
                 return team
             })

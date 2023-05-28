@@ -27,7 +27,6 @@ function RosterTeam() {
     }
     return(
         <div className="rosterTeam--container">
-            {/* <h1 className="rosterTeam--teamName">{currentTeam.name}</h1> */}
             <div className="rosterTeam--playerCardContainer">
                 <div className="rosterTeam--secA">
                     {currentTeam.players.length > 0

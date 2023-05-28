@@ -19,7 +19,6 @@ function RosterLayout() {
 
     const handleShow = (num) => {
         dispatch(actions.showModal(num))
-        console.log(num)
     };
 
     //team data are stored in teamReducer state
@@ -33,9 +32,6 @@ function RosterLayout() {
 
     //when team on rosterList is selected, it will be saved into a state
     const selectedTeam = useSelector(state => state.selectedTeamReducer)
-
-    console.log('current team selected is ' + selectedTeam);
-
 
     //takes all team data and map it to create a list with team name with Links
     const teamEls = teams.map(team => (
@@ -53,17 +49,16 @@ function RosterLayout() {
         <div className='rosterLayout--container'>
             <div className="rosterLayout--nav">
                 <div className="rosterLayout--navBtns">
-                    <button
+                    <Button
                         id="newTeamBtn"
                         onClick={() => handleShow(0)}
-                    >New</button>
+                    >New</Button>
                     {selectedTeam
                         ? <>
-                            <button
+                            <Button
                                 id="editTeamBtn"
                                 onClick={() => handleShow(2)}
-                            >Edit</button>
-                            <Button onClick={() => handleShow(1)}>Add Player</Button>
+                            >Edit</Button>
                         </>
 
                         : null
@@ -73,7 +68,6 @@ function RosterLayout() {
                     {teamEls}
                 </div>
                 <CreateModal number={0} />{/* new_team */}
-                <CreateModal number={1} />{/* add_player */}
                 <CreateModal number={2} />{/* edit_team */}
             </div>
             <Outlet />

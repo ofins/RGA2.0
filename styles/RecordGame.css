@@ -1,0 +1,20 @@
+.recordGame--container {
+  height: 100vh;
+}
+
+.recordGame--scoreBanner {
+  width: 100%;
+  background-color: var(--purple);
+  height: 10%;
+  color: var(--white);
+}
+
+.playerCards {
+  width: 25%;
+  height: 90%;
+}
+
+.recordGame--midContainer {
+  display: flex;
+  justify-content: space-between;
+}/*# sourceMappingURL=RecordGame.css.map */

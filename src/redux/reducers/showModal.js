@@ -15,6 +15,11 @@ const showModalReducer = (
             name: "edit_team",
             status: false,
         },
+        {
+            modalNum: 3,
+            name: "edit_currentlyPlaying",
+            status: false,
+        },
     ],
     action
 ) => {

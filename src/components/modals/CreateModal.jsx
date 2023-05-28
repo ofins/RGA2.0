@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions/index";
 import { useState } from "react";
 import Modal_0 from "./0-createTeam";
-import Modal_1 from "./1-addPlayer";
 import Modal_2 from "./2-editTeam";
+import Modal_3 from "./3-editCurrentlyPlaying";
 
 function CreateModal(props) {
   const dispatch = useDispatch();
@@ -13,7 +13,9 @@ function CreateModal(props) {
   const show = useSelector((state) => state.showModal);
   const handleClose = (num) => {
     dispatch(actions.closeModal(num));
+    console.log('close!')
   };
+
 
   return (
     <Modal
@@ -21,8 +23,8 @@ function CreateModal(props) {
       onHide={() => handleClose(props.number)}
     >
       {props.number === 0 ? <Modal_0 handleClose={handleClose} /> : null}
-      {props.number === 1 ? <Modal_1 handleClose={handleClose} /> : null}
       {props.number === 2 ? <Modal_2 handleClose={handleClose} /> : null}
+      {props.number === 3 ? <Modal_3 handleClose={handleClose} /> : null}
     </Modal>
   );
 }

@@ -32,6 +32,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 80%;
 }
 .home--NewGameContainer .inputBox {
   background: #F5F5F5;
@@ -66,6 +67,7 @@
 
 .inputBox.teamInputs {
   width: 45%;
+  cursor: pointer;
 }
 
 .inputBox::-moz-placeholder {

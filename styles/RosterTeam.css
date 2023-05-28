@@ -1,7 +1,6 @@
 .rosterTeam--container {
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  width: 75%;
   background-color: var(--home-bg);
 }
 
@@ -31,10 +30,10 @@
   height: 70px;
 }
 .rosterTeam--playerCard h2 {
-  font-size: 26px;
+  font-size: 22px;
 }
 .rosterTeam--playerCard h3 {
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .rosterTeam--teamName {

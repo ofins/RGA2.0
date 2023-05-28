@@ -53,7 +53,7 @@ export const showModal = (num) => {
     return {
         type:'SHOW_MODAL',
         payload: {
-            number: num,
+            number: num
         }
     }
 }
@@ -63,6 +63,39 @@ export const closeModal = (num) => {
         type:'CLOSE_MODAL',
         payload: {
             number: num,
+        }
+    }
+}
+
+export const recordTeams = (title, date, homeTeam, awayTeam, game_id) => {
+    return {
+        type: 'record_Teams',
+        payload:{
+            title,
+            date,
+            homeTeam,
+            awayTeam,
+            game_id
+        }
+    }
+}
+
+export const selectCurrentlyPlaying = (position) => {
+    return {
+        type: 'select_currentlyPlaying',
+        payload:{
+            position,
+        }
+    }
+}
+
+export const inputCurrentlyPlaying = (position, player, number) => {
+    return {
+        type: 'input_currentlyPlaying',
+        payload:{
+            position,
+            player,
+            number
         }
     }
 }

@@ -40,13 +40,13 @@ function Modal_0() {
                     )}
                 />
                 </Form.Group>
-                <Form.Group
+                {/* <Form.Group
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"
                 >
                 <Form.Label>Team Players (separate by commas)</Form.Label>
                 <Form.Control as="textarea" rows={3} />
-                </Form.Group>
+                </Form.Group> */}
             </Form>
             </Modal.Body>
             <Modal.Footer>
