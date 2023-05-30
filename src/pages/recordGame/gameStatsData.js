@@ -1,0 +1,18 @@
+export default [
+    {stat: '2_points_success', name: '2 PTS SCORE'},
+    {stat: '2_points_fail', name: '2 PTS FAIL'},
+    {stat: '3_points_success', name: '3 PTS SCORE'},
+    {stat: '3_points_fail', name: '3 PTS FAIL'},
+    {stat: 'foul_attempt_success', name: 'FOUL BALL SCORE'},
+    {stat: 'foul_attempt_fail', name: 'FOUL BALL FAIL'},
+    {stat: 'offensive_rebound', name: 'Offen-Rebound'},
+    {stat: 'defensive_rebound', name: 'Defen-Rebound'},
+    {stat: 'steal', name: 'Steal'},
+    {stat: 'assist', name: 'Assist'},
+    {stat: 'block', name: 'Block'},
+    {stat: 'turnover', name: 'Turnover'},
+    {stat: 'offensive_foul', name: 'Offen-Foul'},
+    {stat: 'defensive_foul', name: 'Defen-Foul'},
+    {stat: 'time_out', name: 'Time Out'},
+    {stat: 'note', name: 'Note'},
+]

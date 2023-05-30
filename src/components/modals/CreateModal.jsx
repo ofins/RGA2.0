@@ -21,6 +21,7 @@ function CreateModal(props) {
     <Modal
       show={show[props.number].status}
       onHide={() => handleClose(props.number)}
+      className="my-modal"
     >
       {props.number === 0 ? <Modal_0 handleClose={handleClose} /> : null}
       {props.number === 2 ? <Modal_2 handleClose={handleClose} /> : null}

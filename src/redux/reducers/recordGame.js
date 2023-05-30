@@ -27,7 +27,25 @@ const recordGameReducer = (state = {
                 date: action.payload.date,
                 game_id: action.payload.game_id,
             };
-        
+        case 'input_stats':
+            return {...state,
+                gameStats:[
+                    
+                    {
+                        player: action.payload.player,
+                        team: action.payload.team,
+                        quarter: action.payload.quarter,
+                        stats: action.payload.stats,
+                        number: action.payload.number,
+                    },
+                    ...state.gameStats, 
+                ]
+            }
+        case 'delete_stats':
+            return {
+                ...state, 
+                ...state.gameStats.splice(action.payload.index, 1)
+            }
         default:
             return state;
     }

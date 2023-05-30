@@ -17,4 +17,46 @@
 .recordGame--midContainer {
   display: flex;
   justify-content: space-between;
+}
+
+.recordGame--gameStatsContainer {
+  width: 40%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+  grid-gap: 5px;
+  padding: 1%;
+}
+.recordGame--gameStatsContainer .gameStats--btn {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background-color: var(--gameStats-btn);
+  border-radius: var(--border-radius-input);
+  padding: 5%;
+}
+.recordGame--gameStatsContainer .gameStats--btn h6 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+.recordGame--gameStatsContainer .gameStats--btn:nth-child(15) {
+  background-color: var(--gameStats-redBtn);
+}
+.recordGame--gameStatsContainer .gameStats--btn:nth-child(16) {
+  background-color: var(--gameStats-redBtn);
+}
+
+.recordGame--tableContainer {
+  box-shadow: var(--box-shadow);
+  height: 35%;
+  width: 60%;
+  margin-inline: auto;
+  overflow-y: scroll;
+}
+
+#floor-player-btn {
+  margin-left: 2%;
 }/*# sourceMappingURL=RecordGame.css.map */

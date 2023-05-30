@@ -89,13 +89,36 @@ export const selectCurrentlyPlaying = (position) => {
     }
 }
 
-export const inputCurrentlyPlaying = (position, player, number) => {
+export const inputCurrentlyPlaying = (player, position, number, team) => {
     return {
         type: 'input_currentlyPlaying',
         payload:{
             position,
             player,
-            number
+            number, 
+            team
+        }
+    }
+}
+
+export const inputStats = (player, team, quarter, stats, number) => {
+    return {
+        type:'input_stats',
+        payload: {
+            player,
+            team,
+            quarter,
+            stats,
+            number,
+        }
+    }
+}
+
+export const deleteStats = (index) => {
+    return {
+        type: 'delete_stats',
+        payload: {
+            index,
         }
     }
 }

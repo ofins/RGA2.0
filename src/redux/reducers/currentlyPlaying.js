@@ -1,13 +1,14 @@
 const currentlyPlayingReducer = (state = [
     {
         position: 1,
-        player: 'jack',
+        player: '',
         number: 0,
-        selected: false
+        selected: false,
+        team:'',
     },
     {
         position: 2,
-        player: 'sammy',
+        player: '',
         number: 0,
         selected: false
     },
@@ -67,7 +68,8 @@ const currentlyPlayingReducer = (state = [
                     return {
                         ...slot,
                         player: action.payload.player,
-                        number: action.payload.number
+                        number: action.payload.number,
+                        team: action.payload.team,
                     }
                 }
                 return slot
