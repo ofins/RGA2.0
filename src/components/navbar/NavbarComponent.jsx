@@ -17,17 +17,17 @@ function NavbarComponent() {
     }
 
     const activeLiveGameStyle = {
-        padding:'5px',
-        borderRadius:'10px',
-        backgroundColor:'red',
-        color:'white',
+        padding: '5px',
+        borderRadius: '10px',
+        backgroundColor: 'red',
+        color: 'white',
     }
 
     const liveGameStyle = {
-        padding:'5px',
-        borderRadius:'10px',
-        backgroundColor:'red',
-        color:'black',
+        padding: '5px',
+        borderRadius: '10px',
+        backgroundColor: 'red',
+        color: 'black',
     }
 
 
@@ -47,7 +47,7 @@ function NavbarComponent() {
                             to="/"
                             className="navbar--links"
                         >
-                            RGA
+                            RGA 籃球攻守紀錄系統
                         </NavLink>
                     </Navbar.Brand>
                     <Nav className="me-5">
@@ -66,7 +66,7 @@ function NavbarComponent() {
                                 to="games"
                                 style={({ isActive }) => isActive ? activeStyles : null}
                                 className="navbar--links disabled"
-                                
+
                             >
                                 Games
                             </NavLink>
@@ -86,7 +86,7 @@ function NavbarComponent() {
                                 <NavLink
                                     to="record-game"
                                     style={({ isActive }) => isActive ? activeLiveGameStyle : liveGameStyle}
-                                    className="navbar--links"
+                                    className={({ isActive }) => isActive ? 'navbar--links' : 'navbar--links on-going'}
                                 >
                                     On-Going Game
                                 </NavLink>

@@ -28,12 +28,17 @@
   border-radius: var(--border-radius-input);
   background-color: var(--roster-bg);
   height: 70px;
+  transition: all 1s ease;
 }
 .rosterTeam--playerCard h2 {
   font-size: 22px;
 }
 .rosterTeam--playerCard h3 {
   font-size: 18px;
+}
+
+.rosterTeam--playerCard:hover {
+  transform: translateY(-10%);
 }
 
 .rosterTeam--teamName {

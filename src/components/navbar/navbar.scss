@@ -22,5 +22,39 @@
 }
 
 .navbar--logo img:hover {
-    transform: translateX(-200%);
+    animation: spinning 1s ease;
+}
+
+.navbar--links.on-going {
+    animation: blinking 3s infinite linear;
+}
+
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes rolling {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-200%);
+    }
+}
+
+@keyframes blinking {
+    0% {
+        background-color: var(--white);
+    }
+    50% {
+        background-color: red;
+    }
+    100% {
+        background-color: var(--white);
+    }
 }

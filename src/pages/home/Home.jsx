@@ -69,8 +69,9 @@ function Home() {
                   title: e.target.value,
                 })
               }
+              autoFocus
               type="text"
-              placeholder="Title: e.g. falcon vs Taco"
+              placeholder="Title: e.g. LA Laker vs GS Warriors #212"
               name="title"
               className="inputBox title"
             />
