@@ -57,16 +57,21 @@ function Modal_3({ handleClose }) {
 
     //create a list of players based on selected team and input it into table
 
+    const optionStyle = {
+        width: '200px'
+    }
+
     const homePosition = [1, 2, 3, 4, 5]
     const displayHomeList = homePosition.map((position, index) => (
         <tr key={index} className="text-center">
             <td>
                 <select
+                    style={optionStyle} className='text-center'
                     onChange={(e) => handleOptionSelect(e, position)}
                     value={currentlyPlaying[position - 1].player}
                 >
-                    
-                    <option>
+
+                    <option >
                         {currentlyPlaying[position - 1].player !== '' ?
                             currentlyPlaying[position - 1].player :
                             'Select a player'
@@ -89,6 +94,7 @@ function Modal_3({ handleClose }) {
         <tr key={index} className="text-center">
             <td>
                 <select
+                    style={optionStyle} className='text-center'
                     onChange={(e) => handleOptionSelect(e, position)}
                     value={currentlyPlaying[position - 1].player}
                 >

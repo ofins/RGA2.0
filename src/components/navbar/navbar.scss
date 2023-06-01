@@ -13,3 +13,14 @@
 .navbar--links:hover, .navbar--logo:hover {
     color: var(--yellow);
 }
+
+.navbar--logo {
+    img {
+        margin-top:-1px;
+        transition:all 1s ease;
+    }
+}
+
+.navbar--logo img:hover {
+    transform: translateX(-200%);
+}

@@ -49,6 +49,7 @@ function Home() {
           randomDigits5()
         )
       );
+      dispatch(actions.resetCurrentlyPlaying())
       navigate("/record-game");
       return null;
     }

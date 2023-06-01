@@ -38,7 +38,7 @@ function NavbarComponent() {
                     <Navbar.Brand className="navbar--logo">
                         <img
                             alt=""
-                            src="/logo.svg"
+                            src="/bball.svg"
                             width="30"
                             height="30"
                             className="d-inline-block align-top"

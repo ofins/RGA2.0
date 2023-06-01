@@ -7,12 +7,13 @@ import * as actions from "../../redux/actions";
 import gameStatsData from './gameStatsData'
 import CreateModal from "../../components/modals/CreateModal";
 import PlayerCard from "../../components/playerCard/PlayerCard";
+import { useNavigate } from "react-router-dom";
 
 function RecordGame() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const recordStats = useSelector((state) => state.recordGame);
-  console.log(recordStats);
 
   //find entire team data for home and away team by matching the team names passed in here
   const homeTeam = useSelector((state) => state.teamReducer).filter(
@@ -21,7 +22,6 @@ function RecordGame() {
   const awayTeam = useSelector((state) => state.teamReducer).filter(
     (team) => team.name === recordStats.away.team
   );
-  console.log(homeTeam)
 
   //create a redux state for 5 slots on each side, these are the players that are currently playing on the fields. These can be swapped at any time.
 
@@ -35,14 +35,14 @@ function RecordGame() {
 
   //game stats btn elements
   const gameStatsBtnEls = gameStatsData.map((btn, index) => (
-    <div onClick={() => handleInputStats(2, btn.name)} key={index} className="gameStats--btn">
+    <div onClick={() => handleInputStats(recordStats.quarter, btn.name)} key={index} className="gameStats--btn">
       <h6>{btn.name}</h6>
     </div>
   ))
 
   //find selected player, number, team
   const selectedPlayer = currentlyPlaying.find(player => player.selected === true)
-  console.log(selectedPlayer)
+
   //handleInputStats button
   const handleInputStats = (quarter, stats) => {
     //run only if player is selected
@@ -55,13 +55,58 @@ function RecordGame() {
   //handleStatsDelete button
   const handleDeleteStats = (index) => {
     dispatch(actions.deleteStats(index))
+    runScore() //this updates the score when point is deleted
   }
 
   //save scores in a state
-  // const [score, setScore] = useState({home: 0, away: 0});
-  // useEffect(() => {
-  //   homeScore = recordStats.gameStats.map(item => item.stats === '2 PTS SCORE')
-  // }, [recordStats.gameStats])
+  const [score, setScore] = useState({ home: 0 });
+
+  let homeScoreCount = 0;
+  let awayScoreCount = 0;
+
+  //function to count score based on 2 or 3 pts and team
+  function runScore() {
+    recordStats.gameStats.map(item => {
+      if (item.team === recordStats.home.team && item.stats === '2 PTS SCORE') {
+        return homeScoreCount++
+      } else if (item.team === recordStats.away.team && item.stats === '2 PTS SCORE') {
+        return awayScoreCount++
+      } else if (item.team === recordStats.home.team && item.stats === '3 PTS SCORE') {
+        homeScoreCount = homeScoreCount + 1.5
+      } else if (item.team === recordStats.away.team && item.stats === '3 PTS SCORE') {
+        awayScoreCount = awayScoreCount + 1.5
+      }
+    })
+    setScore({ home: homeScoreCount * 2, away: awayScoreCount * 2 })
+  }
+
+
+  //useEffect to reload whenever log is updated
+  useEffect(() => {
+    runScore()
+  }, [recordStats.gameStats])
+  console.log(score)
+
+  // TOGGLE QUARTER **
+
+  const handleQuarter = () => {
+    if (recordStats.quarter < 4) {
+      dispatch(actions.toggleQuarter())
+      return
+    }
+    dispatch(actions.toggleQuarterEnd())
+    if (recordStats.quarter === 'End Game') {
+      dispatch(actions.recordScore(score.home, score.away))
+      navigate('/post-game')
+      dispatch(actions.toggleQuarterNew())
+    }
+  }
+
+  const handlePrevQuarter = () => {
+    dispatch(actions.togglePrevQuarter())
+  }
+
+  console.log(recordStats.gameStats)
 
 
   const gameStatEls = recordStats.gameStats.map((stat, index) => (
@@ -80,21 +125,25 @@ function RecordGame() {
       <div className="recordGame--scoreBanner">
         <Row className="d-flex justify-content-center text-center align-items-center">
           <Col>
-            <h6>Home | {recordStats.home.team}</h6>
+            <h6 >Home | {recordStats.home.team}</h6>
           </Col>
           <Col>
-            <h3>{recordStats.home.score}</h3>
+            <h3 className="gameScore">{score.home}</h3>
           </Col>
           <Col>
             <div className="recordGame--quarterPanel">
-              <h2>Q2</h2>
-              <Button size="sm" variant="warning">
-                start/next/end
+              <h2>{recordStats.quarter}</h2>
+              {recordStats.quarter > 1 ?
+                <Button onClick={handlePrevQuarter} className="mx-1 quarterBtn" size="sm" variant="warning">Prev</Button>
+                : null
+              }
+              <Button className="mx-1 quarterBtn" onClick={handleQuarter} size="sm" variant="warning">
+                {recordStats.quarter === 'End Game' ? 'End' : 'Next'}
               </Button>
             </div>
           </Col>
           <Col>
-            <h3>{recordStats.home.score}</h3>
+            <h3 className="gameScore">{score.away}</h3>
           </Col>
           <Col>
             <h6>Away | {recordStats.away.team}</h6>
@@ -160,7 +209,7 @@ function RecordGame() {
           />
         </div>
       </div>
-      <Button id='floor-player-btn' size="sm" onClick={() => handleInputPlayer(3)}>Floor Players</Button>
+      <Button id='floor-player-btn' size="sm" onClick={() => handleInputPlayer(3)}>Edit Court Players</Button>
       <div className="recordGame--tableContainer">
         <Table striped bordered hover className="text-center">
           <thead>

@@ -1,0 +1,19 @@
+.postGame--container {
+    width:100%;
+    padding:1%;
+}
+
+.postGame--subContainer {
+    width:100%;
+    text-align: center;
+}
+
+.postGame--info {
+    display:flex;
+    justify-content: space-between;
+    text-align: right;
+    h3{
+        text-transform: uppercase;
+        font-weight:700;
+    }
+}

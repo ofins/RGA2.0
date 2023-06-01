@@ -8,11 +8,17 @@
     height:10%;
     // margin-top:5px;
     color: var(--white);
+    .gameScore {
+        font-size: 40px;
+        font-weight:700;
+    }
 }
 
 .playerCards {
     width:25%;
     height:90%;
+    cursor:pointer;
+
 }
 
 .recordGame--midContainer {
@@ -27,7 +33,7 @@
     place-items: center;
     grid-gap:5px;
     padding:1%;
-    
+    cursor:pointer;
     .gameStats--btn {
         display:grid;
         place-items: center;
@@ -61,4 +67,8 @@
 
 #floor-player-btn {
     margin-left:2%;
+}
+
+.quarterBtn {
+    cursor:pointer;
 }

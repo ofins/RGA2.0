@@ -8,7 +8,6 @@ function PlayerCard(props) {
 
   //get data for players that are currently playing
   const currentlyPlaying = useSelector((state) => state.currentlyPlaying);
-  console.log(currentlyPlaying)
 
 
   //when player card is clicked, it will highlight the card indicating that this player can currently have stats added to its profile

@@ -8,6 +8,7 @@ import Home from './pages/home/Home';
 import RosterLayout from './components/rosterLayout/RosterLayout';
 import RosterTeam from './pages/rosterTeam/RosterTeam';
 import RecordGame from './pages/recordGame/recordGame';
+import PostGame from './pages/postGame/PostGame';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="record-game" element={<RecordGame />} />
+            <Route path="post-game" element={<PostGame />} />
             <Route path="roster" element={<RosterLayout />}>
                 <Route path=":id" element={<RosterTeam />} />
             </Route>

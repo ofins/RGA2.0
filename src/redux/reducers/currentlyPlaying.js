@@ -87,6 +87,15 @@ const currentlyPlayingReducer = (state = [
                     selected: false
                 }
             })
+        case 'reset_currentlyPlaying':
+            return state.map(item => {
+                return {
+                    ...item,
+                    player:'',
+                    number: 0,
+                    selected:false,
+                }
+            })
         default:
             return state
     }
