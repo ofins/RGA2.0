@@ -19,4 +19,3 @@ npm install
 - [ ] Add Game section where users can view pasts game stats
 - [ ] Add Analysis section
 - [ ] Traditional-Chinese
-
