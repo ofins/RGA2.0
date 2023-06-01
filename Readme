@@ -16,7 +16,7 @@ npm install
 
 ### Roadmap
 - [x] Show post game stats at the end
-- [] Add Game section where users can view pasts game stats
-- [] Add Analysis section
-- [] Multi-language support
-- - [] Traditional-Chinese
+- [ ] Add Game section where users can view pasts game stats
+- [ ] Add Analysis section
+- [ ] Traditional-Chinese
+
