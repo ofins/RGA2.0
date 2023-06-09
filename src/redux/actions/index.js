@@ -1,3 +1,12 @@
+export const importTeams = (obj) => {
+  return {
+    type:"IMPORT_TEAMS",
+    payload:{
+      obj
+    }
+  }
+}
+
 export const addTeam = (name) => {
   return {
     type: "ADD_TEAM",
@@ -20,7 +29,7 @@ export const addPlayer = (obj) => {
   return {
     type: "ADD_PLAYER",
     payload: {
-      teamName: obj.teamName,
+      teamId: obj.teamId,
       playerName: obj.playerName,
       playerNumber: obj.playerNumber,
     },
@@ -29,7 +38,7 @@ export const addPlayer = (obj) => {
 
 export const editPlayerName = (
   teamName,
-  playerName,
+  playerId,
   updatedPlayerName,
   updatedPlayerNumber
 ) => {
@@ -37,19 +46,19 @@ export const editPlayerName = (
     type: "EDIT_PLAYER",
     payload: {
       teamName,
-      playerName,
+      playerId,
       updatedPlayerName,
       updatedPlayerNumber,
     },
   };
 };
 
-export const deletePlayerName = (teamName, playerName) => {
+export const deletePlayerName = (team, playerId) => {
   return {
     type: "DELETE_PLAYER",
     payload: {
-      teamName,
-      playerName,
+      team,
+      playerId,
     },
   };
 };
@@ -269,5 +278,21 @@ export const recordScore = (homeScore, awayScore) => {
       homeScore,
       awayScore
     }
+  }
+}
+
+export const login = (userName, password) => {
+  return {
+    type: 'login',
+    payload: {
+      userName,
+      password
+    }
+  }
+}
+
+export const logout = () => {
+  return {
+    type: 'logout'
   }
 }

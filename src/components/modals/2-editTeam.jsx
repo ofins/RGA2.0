@@ -1,16 +1,29 @@
 import { Modal, Button, Form, Table } from "react-bootstrap";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faPenToSquare, } from '@fortawesome/free-regular-svg-icons'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../redux/actions/index";
+import axios from 'axios'
 
 function Modal_2({ handleClose }) {
   const dispatch = useDispatch();
 
+  //this is made only to give useEffect something to trigger
+  const [deleteStat, setDeleteStat] = useState(false)
+  
+  //fetch data for all teams
+  const fetchAllTeams = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/teams")
+      dispatch(actions.importTeams(res.data))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // DISPLAYING PLAYER LIST **
   //get players info from Redux state
   const teams = useSelector((state) => state.teamReducer);
+  
 
   //check which team is currently selected
   const selectedTeam = useSelector((state) => state.selectedTeamReducer);
@@ -19,25 +32,27 @@ function Modal_2({ handleClose }) {
   //create state to hold updated info for editing player name/number
   const [updatePlayer, setUpdatePlayer] = useState({
     status: false,
-    playerName: "",
+    playerId: null,
     teamName: selectedTeam,
     newPlayerName: "",
     newPlayerNumber: "",
   });
+
+
 
   //update button
   const handleUpdate = () => {
     dispatch(
       actions.editPlayerName(
         selectedTeam,
-        updatePlayer.playerName,
+        updatePlayer.playerId,
         updatePlayer.newPlayerName,
         updatePlayer.newPlayerNumber
       )
     );
     setUpdatePlayer({
       status: false,
-      playerName: "",
+      playerId: null,
       playerNumber: "",
       teamName: selectedTeam,
       newPlayerNumber: "",
@@ -46,15 +61,20 @@ function Modal_2({ handleClose }) {
   };
 
   //filter the players from selectedTeam
-  const players = teams.find((item) => {
-    return item.name === selectedTeam;
-  }).players;
+  let players = [];
+  {
+    teams.length > 0?
+      players = teams.find((item) => {
+        return item._id === selectedTeam;
+      }).players
+      : null
+  }
 
   //create a list of players based on selected team and input it into table
   const playerList = players.map((player, index) => (
     <tr key={index} className="text-center">
       <td>
-        {updatePlayer.playerName === player.name ? (
+        {updatePlayer.playerId === player._id ? (
           <input
             type="text"
             onChange={(e) =>
@@ -71,7 +91,7 @@ function Modal_2({ handleClose }) {
         )}
       </td>
       <td>
-        {updatePlayer.playerName === player.name ? (
+        {updatePlayer.playerId === player._id ? (
           <input
             type="text"
             onChange={(e) =>
@@ -88,13 +108,15 @@ function Modal_2({ handleClose }) {
         )}
       </td>
       <td>
-        {updatePlayer.playerName === player.name ? (
+        {updatePlayer.playerId === player._id ? (
           <Button variant="light" onClick={handleUpdate}>
             Update
           </Button>
         ) : (
           <Button
-            onClick={() => handleEdit(player.name, player.number)}
+            onClick={() => {
+              handleEdit(player._id)
+            }}
             variant="light"
           >
             Edit
@@ -103,8 +125,10 @@ function Modal_2({ handleClose }) {
       </td>
       <td>
         <Button
-          onClick={() =>
-            dispatch(actions.deletePlayerName(selectedTeam, player.name))
+          onClick={() => {
+            dispatch(actions.deletePlayerName(selectedTeam, player._id))
+            setDeleteStat(prev => !prev)
+          }
           }
           variant="light"
         >
@@ -115,12 +139,12 @@ function Modal_2({ handleClose }) {
   ));
 
   //when edit button is clicked, edit input box will appear and store which names to be edited in updatePlayer state
-  const handleEdit = (name, number) => {
+  const handleEdit = (playerId) => {
     setUpdatePlayer({
       ...updatePlayer,
       status: true,
-      playerName: name,
-      playerNumber: number,
+      playerId,
+      // playerNumber: number,
     });
   };
 
@@ -129,25 +153,30 @@ function Modal_2({ handleClose }) {
   //temporary create new player name saved here
   const [newPlayer, setNewPlayer] = useState({
     status: false,
-    teamName: selectedTeam,
+    teamId: selectedTeam,
     playerNumber: null,
     playerName: "",
   });
+
+  useEffect(()=>{
+    fetchAllTeams();
+  }, [updatePlayer, newPlayer, deleteStat])
 
   const handleAddPlayer = () => {
     dispatch(actions.addPlayer(newPlayer));
     setNewPlayer({
       status: false,
-      teamName: selectedTeam,
+      teamId: selectedTeam,
       playerNumber: null,
       playerName: "",
     });
+
   };
 
   return (
     <>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Team: {selectedTeam}</Modal.Title>
+        <Modal.Title>Edit Team</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Table striped bordered hover variant="dark">
@@ -196,11 +225,13 @@ function Modal_2({ handleClose }) {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          onClick={() =>
+          onClick={() => {
             setNewPlayer({
               ...newPlayer,
               status: true,
             })
+
+          }
           }
           variant="primary"
         >

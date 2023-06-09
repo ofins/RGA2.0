@@ -15,6 +15,17 @@ npm install
 ```
 ### Usage
 
+### Developer Logs
+**version 1.1**
+*Major changes*
+- added Game section for viewing past games
+- added Login section 
+
+*Minor Changes*
+- added delete button for rosters
+- fixed fetch data bugs in rosters
+
+
 #### Getting Started - Adding team to the Roster
 ![adding new team](./public/9.png)
 Navigate to *Roster* on the navbar at the top. User will be able to click the *New* button on the left column to add new team. 
@@ -62,11 +73,22 @@ Date of game is shown at the top left.
 Game ID is a unique ID generated for each game, shown at the top right.
 
 
-
 ### Roadmap
 - [x] Show post game stats at the end
+- [x] Host backend server to keep all the data on MongoDB
+- [x] Login function for host with added permissions
 - [ ] Functional time-out/note button
-- [ ] Add Game section where users can view pasts game stats
+- [x] Add Game section where users can view pasts game stats
 - [ ] Add Analysis section
 - [ ] Traditional-Chinese
 - [ ] Log for swapping players during the game
+
+### Bugs
+- [x] delete button works in roster>edit team but page will go blank at first
+- [x] when adding player in roster, sometimes the player list will not update on the spot
+- [x] when adding NEW TEAM, roster list are not updated on the spot (added a trigger to "fetchAllteams" when showModal state is changed. RosterLayout: 40)
+- [x] if there are only one team on roster, team will not load even when clicked on (added if teams.length > 0 so teams.map will not map if length is 0)
+- [ ] There are no team name and team score in game stats section
+- [ ] "On-going Game" in navbar should be off when the game has ended
+
+

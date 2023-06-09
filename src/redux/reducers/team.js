@@ -1,82 +1,54 @@
+import axios from 'axios'
 let id = 2;
 
 const teamReducer = (
-  state = [
-    {
-      id: 1,
-      name: "LA Lakers",
-      players: [
-        { name: "Kobe Bryant", number: 24 },
-        { name: "Lebron James", number: 6 },
-        { name: "Paul Gasol", number: 16 },
-        { name: "Lamar Odom", number: 17 },
-        { name: "Shaquille O'Neal", number: 34 },
-        { name: "Magic Johnson", number: 32 },
-        { name: "Kareem Abdul-Jabbar", number: 33 },
-      ],
-    },
-    {
-      id: 2,
-      name: "GS Warriors",
-      players: [
-        { name: "Stephen Curry", number: 30 },
-        { name: "Draymond Green", number: 23 },
-        { name: "Klay Thompson", number: 11 },
-        { name: "Kevin Looney", number: 5 },
-        { name: "Anthony Lamb", number: 40 },
-        { name: "Lester Quinones", number: 25 },
-        { name: "Andrew Wiggins", number: 22 },
-      ],
-    },
-  ],
+  state = [],
   action
 ) => {
   switch (action.type) {
+    case "IMPORT_TEAMS":
+      return state = action.payload.obj
     case "ADD_TEAM":
-      id = id + 1;
-      return [
-        ...state,
-        {
-          id: id,
-          name: action.payload.teamName,
-          players: [],
-        },
-      ];
+      return add();
+      async function add() {
+        try {
+          const res = await axios.post("http://localhost:5000/teams", {teamName: action.payload.teamName})
+        } catch (error) {
+          console.log(error)
+        }
+      }
     case "ADD_PLAYER":
-      return state.map((team) => {
-        if (team.name === action.payload.teamName) {
-          team.players.push({
-            name: action.payload.playerName,
-            number: action.payload.playerNumber,
-          });
-        }
-        return team;
-      });
+      return addPlayer(action.payload.teamId, action.payload.playerName, action.payload.playerNumber)
+    async function addPlayer(teamId, playerName, playerNumber) {
+      try {
+        const res = axios.post("http://localhost:5000/teams/"+teamId, {teamId, name: playerName, number: playerNumber})
+      } catch (error) {
+        console.log(error)
+      }
+    }  
     case "EDIT_PLAYER":
-      return state.map((team) => {
-        if (team.name === action.payload.teamName) {
-          const pIndex = team.players.findIndex(
-            (player) => player.name === action.payload.playerName
-          );
-          team.players[pIndex].name = action.payload.updatedPlayerName;
-          team.players[pIndex].number = action.payload.updatedPlayerNumber;
+      return editPlayer(action.payload.playerId, action.payload.updatedPlayerName, action.payload.updatedPlayerNumber);
+      async function editPlayer(id, playerName, playerNumber) {
+        try {
+          const res = axios.put("http://localhost:5000/teams/"+id,  {name: playerName, number: playerNumber})
+        } catch (error) {
+          console.log(error)
         }
-        return team;
-      });
-      return state;
+      }
     case "DELETE_PLAYER":
-      return state.map((team) => {
-        if (team.name === action.payload.teamName) {
-          const pIndex = team.players.findIndex(
-            (player) => player.name === action.payload.playerName
-          );
-          team.players.splice(pIndex, 1);
+      return deletePlayer(action.payload.team, action.payload.playerId);
+      async function deletePlayer(team, playerId) {
+        try {
+          const res = axios.delete("http://localhost:5000/teams/"+playerId)
+        } catch (error) {
+          console.log(error)
         }
-        return team;
-      });
+      }
     default:
       return state;
   }
 };
 
 export default teamReducer;
+
+

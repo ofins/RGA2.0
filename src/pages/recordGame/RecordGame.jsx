@@ -26,7 +26,6 @@ function RecordGame() {
   //create a redux state for 5 slots on each side, these are the players that are currently playing on the fields. These can be swapped at any time.
 
   const currentlyPlaying = useSelector((state) => state.currentlyPlaying);
-  console.log(currentlyPlaying);
 
   //This is to open Table to input players into player card
   const handleInputPlayer = (num) => {
@@ -107,7 +106,6 @@ function RecordGame() {
   useEffect(() => {
     runScore();
   }, [recordStats.gameStats]);
-  console.log(score);
 
   // TOGGLE QUARTER **
 
@@ -128,7 +126,6 @@ function RecordGame() {
     dispatch(actions.togglePrevQuarter());
   };
 
-  console.log(recordStats.gameStats);
 
   const gameStatEls = recordStats.gameStats.map((stat, index) => (
     <tr key={index}>

@@ -8,7 +8,7 @@ import {
 import { useSelector } from 'react-redux'
 
 function NavbarComponent() {
-
+    const login = useSelector(state => state.login)
     const recordGame = useSelector(state => state.recordGame)
 
     const activeStyles = {
@@ -51,6 +51,7 @@ function NavbarComponent() {
                         </NavLink>
                     </Navbar.Brand>
                     <Nav className="me-5">
+                        {login.isLoggedIn ? 
                         <Nav.Link className="navbar--links mx-4">
                             <NavLink
                                 to="roster"
@@ -60,13 +61,12 @@ function NavbarComponent() {
                                 Roster
                             </NavLink>
                         </Nav.Link>
-                        {/* disabled */}
-                        <Nav.Link className="navbar--link mx-4" disabled>
+                        : null}
+                        <Nav.Link className="navbar--link mx-4">
                             <NavLink
                                 to="games"
                                 style={({ isActive }) => isActive ? activeStyles : null}
                                 className="navbar--links disabled"
-
                             >
                                 Games
                             </NavLink>
@@ -79,6 +79,14 @@ function NavbarComponent() {
                                 className="navbar--links"
                             >
                                 Analysis
+                            </NavLink>
+                        </Nav.Link>
+                        <Nav.Link className="navbar--link mx-4">
+                            <NavLink
+                                to="login"
+                                className="navbar--links"
+                            >
+                                Login
                             </NavLink>
                         </Nav.Link>
                         {recordGame.game_id !== '' ?

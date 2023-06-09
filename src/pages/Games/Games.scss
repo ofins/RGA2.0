@@ -1,0 +1,23 @@
+.games--filterContainer {
+    display:flex;
+    p {
+        place-items: center;
+        justify-content: center;
+    }
+}
+
+.games--gameInfo {
+    display:flex;
+    margin-top:50px;
+    justify-content: space-between;
+    span {
+        display:flex;
+        place-items: center;
+        gap:10px;
+    }
+}
+
+.games--border {
+    box-shadow: var(--box-shadow);
+    padding:1%;
+}

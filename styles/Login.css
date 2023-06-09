@@ -1,0 +1,27 @@
+.login--container {
+    height:100vh;
+    display:grid;
+    place-items: center;
+}
+
+.login--loginBox {
+    height:30%;
+    width:40%;
+    margin-top:-200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+.login--loginBox input {
+    width:60%;
+    margin-inline:auto;
+}
+
+.login--loginBox button {
+    width:40%;
+    margin-inline:auto;
+}

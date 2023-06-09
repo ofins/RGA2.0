@@ -1,13 +1,37 @@
 import "../../../styles/Home.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as actions from "../../redux/actions";
+import axios from 'axios'
 
 function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  //import teams
+    // const [importTeams, setImportTeams] = useState(
+    //     {
+    //       "teamName": '',
+    //       "players": {
+    //         "name": '',
+    //         "number": null
+    //       }
+    //     }
+    // )
 
+    useEffect(() => {
+      fetchAllTeams();
+    }, [])
+    const fetchAllTeams = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/teams")
+        dispatch(actions.importTeams(res.data))
+        console.log(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    
   //Date
   const today = new Date();
   const date =
@@ -33,8 +57,9 @@ function Home() {
   //get list of teams
   const teams = useSelector((state) => state.teamReducer);
 
+
   const teamList = teams.map((team, index) => (
-    <option key={index}>{team.name}</option>
+    <option key={index}>{team.teamName}</option>
   ));
 
   //when next is clicked, pass selected team info into redux state for recordGame

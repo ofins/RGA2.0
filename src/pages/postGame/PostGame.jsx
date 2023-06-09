@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 import "../../../styles/PostGame.css";
 import { Table, Col, Row, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import gameStatsData from "../recordGame/gameStatsData";
 import * as actions from "../../redux/actions";
+import axios from 'axios'
 
 function PostGame() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //post game stats
     const postGameStats = useSelector((state) => state.postGameStats);
-    //get recordGame stats information
 
+    //get recordGame stats information
     const recordGame = useSelector(state => state.recordGame)
-    console.log(recordGame.gameStats)
 
     //list out all the players that participated in this game for each team
     const activeHomePlayers = [];
@@ -34,7 +36,7 @@ function PostGame() {
     }
     unitePlayers();
 
-    // input stats
+    // input stats into redux state
 
     function run(arr) {
         arr.map((player) => {
@@ -220,6 +222,22 @@ function PostGame() {
         </tr>
     ))
 
+    async function handleSaveGame(title, date, gameId) {
+        try {
+            const res = await axios.post("http://localhost:5000/gamestats", {
+                title: title,
+                date: date,
+                gameId: gameId,
+                home: postGameStats.home,
+                away: postGameStats.away
+            })
+            alert('game saved!')
+            navigate("/")
+            console.log('game saved')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -228,6 +246,7 @@ function PostGame() {
                 <h3>{recordGame.title}</h3>
                 <p>Game ID: {recordGame.game_id}</p>
             </div>
+            <Button variant="primary" onClick={() => { handleSaveGame(recordGame.title, recordGame.date, recordGame.game_id) }}>Save Game Stats</Button>
             <div className="postGame--container">
                 <div className="postGame--subContainer home">
                     <h3>Home - {recordGame.home.score}</h3>

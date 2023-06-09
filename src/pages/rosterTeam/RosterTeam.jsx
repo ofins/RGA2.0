@@ -10,17 +10,19 @@ function RosterTeam() {
     const [currentTeam, setCurrentTeam] = useState(null)
 
     const teams = useSelector(state => state.teamReducer) 
-    // console.log(teams)
+    console.log(teams)
     // console.log(id)
 
     //when the page loads, fetch the team based on URL
     useEffect(() => {
-        teams.map(team => {
-            if(team.id === parseInt(id)){
-                setCurrentTeam(team)
-            }
-        })
-    }, [id])
+        if(teams.length > 0) {
+            teams.map(team => {
+                if(team._id === id){
+                    setCurrentTeam(team)
+                }
+            })
+        }
+    }, [id, teams])
 
     if(!currentTeam){
         return <h3>loading...</h3>

@@ -9,8 +9,11 @@ import RosterLayout from './components/rosterLayout/RosterLayout';
 import RosterTeam from './pages/rosterTeam/RosterTeam';
 import RecordGame from './pages/recordGame/recordGame';
 import PostGame from './pages/postGame/PostGame';
+import Games from './pages/Games/Games'
+import Login from './pages/Login/Login';
 
 function App() {
+  const login = useSelector(state => state.login)
 
   return (
       <BrowserRouter>
@@ -19,7 +22,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path="record-game" element={<RecordGame />} />
             <Route path="post-game" element={<PostGame />} />
-            <Route path="roster" element={<RosterLayout />}>
+            <Route path="games" element={<Games />} />
+            <Route path="login" element={<Login />} />
+            <Route path={login.isLoggedIn ? "/roster" : null} element={<RosterLayout />}>
                 <Route path=":id" element={<RosterTeam />} />
             </Route>
           </Route>

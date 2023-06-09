@@ -15,24 +15,21 @@ function Modal_3({ handleClose }) {
     //get both team's info from Redux state
     const currentlyPlaying = useSelector(state => state.currentlyPlaying)
     const recordStats = useSelector(state => state.recordGame)
+    const test = useSelector(state => state.teamReducer)
 
     //find entire team data for home and away team by matching the team names passed in here
     const homeTeam = useSelector((state) => state.teamReducer).filter(
-        (team) => team.name === recordStats.home.team
+        (team) => team.teamName === recordStats.home.team
     );
     const awayTeam = useSelector((state) => state.teamReducer).filter(
-        (team) => team.name === recordStats.away.team
+        (team) => team.teamName === recordStats.away.team
     );
-    console.log('home team is')
-    console.log(recordStats)
 
     //list them into arrays
     if (homeTeam.length !== 0 && awayTeam.length !== 0) {
         var homeTeamList = homeTeam[0].players.map(obj => obj.name)
         var awayTeamList = awayTeam[0].players.map(obj => obj.name)
     }
-
-    console.log(awayTeamList)
 
     //when option is selected, update the currentlyPlaying state on Redux
     const handleOptionSelect = (e, position) => {

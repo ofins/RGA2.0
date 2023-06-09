@@ -25,7 +25,10 @@
   margin: 1% 1% 1% 0;
   background-color: white;
   text-transform: uppercase;
-  padding-right: 1%;
+  padding-inline: 1%;
+  display:flex;
+  justify-content: space-between;
+  place-items: center;
 }
 
 .rosterLayout--navBtns {
