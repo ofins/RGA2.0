@@ -4,27 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as actions from "../../redux/actions";
 import axios from 'axios'
+import {Button, Modal} from 'react-bootstrap'
 
 function Home() {
+  const [show, setShow] = useState(false)
+  const handleClose = () => {setShow(false)}
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  //import teams
-    // const [importTeams, setImportTeams] = useState(
-    //     {
-    //       "teamName": '',
-    //       "players": {
-    //         "name": '',
-    //         "number": null
-    //       }
-    //     }
-    // )
-
-    useEffect(() => {
+  
+  useEffect(() => {
+      console.log(
+        'Note: RGA backend server is hosted on render.com and using free tier service. Pushing and pulling data from database will have some delays'
+      )
       fetchAllTeams();
     }, [])
     const fetchAllTeams = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/teams")
+        const res = await axios.get("https://rga-backend-jdbm.onrender.com/teams")
         dispatch(actions.importTeams(res.data))
         console.log(res.data)
       } catch (error) {
@@ -76,9 +73,9 @@ function Home() {
       );
       dispatch(actions.resetCurrentlyPlaying())
       navigate("/record-game");
-      return null;
+      return null
     }
-    alert("Please choose two different teams!");
+    return alert('please choose two different teams!')
   };
 
   return (
@@ -133,12 +130,21 @@ function Home() {
               </select>
             </div>
           </div>
-          {/* <input type="date" placeholder='date' name='game_date' className='inputBox' required /> */}
           <button onClick={handleClick} type="submit">
             Next
           </button>
         </form>
       </div>
+        <Modal centered className="my-modal" show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+          </Modal.Header>
+            <Modal.Body>
+              <h5>Please choose two different teams!</h5>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={handleClose}>Understood</Button>
+            </Modal.Footer>
+        </Modal>
     </div>
   );
 }

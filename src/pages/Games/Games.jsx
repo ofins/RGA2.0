@@ -16,7 +16,7 @@ const Games = () => {
     //get historic game data from database
     const fetchGameData = async () => {
         try {
-            const gameStats = await axios.get("http://localhost:5000/gamestats")
+            const gameStats = await axios.get("https://rga-backend-jdbm.onrender.com/gamestats")
             setGameData(gameStats.data)
         } catch (error) {
             console.log(error)
@@ -38,7 +38,7 @@ const Games = () => {
     //delete, edit stats button
     const handleDelete = async (id) => {
         try {
-            axios.delete("http://localhost:5000/gamestats/" + id)
+            axios.delete("https://rga-backend-jdbm.onrender.com/gamestats/" + id)
             // window.location.reload();
             setToggle(prev => !prev)
         } catch (error) {

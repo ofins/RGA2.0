@@ -26,7 +26,7 @@ function RosterLayout() {
     //fetch data for all teams
     const fetchAllTeams = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/teams")
+            const res = await axios.get("https://rga-backend-jdbm.onrender.com/teams")
             dispatch(actions.importTeams(res.data))
         } catch (error) {
             console.log(error)
@@ -48,7 +48,7 @@ function RosterLayout() {
     //deleting team from database
     const handleDelete = async(id) => {
         try {
-            const res = await axios.delete("http://localhost:5000/teams/delete/"+id)
+            const res = await axios.delete("https://rga-backend-jdbm.onrender.com/teams/delete/"+id)
             setToggle(prev => !prev)
         } catch (error) {
             console.log(error)

@@ -13,7 +13,7 @@ function Modal_2({ handleClose }) {
   //fetch data for all teams
   const fetchAllTeams = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/teams")
+      const res = await axios.get("https://rga-backend-jdbm.onrender.com/teams")
       dispatch(actions.importTeams(res.data))
     } catch (error) {
       console.log(error)

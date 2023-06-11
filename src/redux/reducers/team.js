@@ -12,7 +12,7 @@ const teamReducer = (
       return add();
       async function add() {
         try {
-          const res = await axios.post("http://localhost:5000/teams", {teamName: action.payload.teamName})
+          const res = await axios.post("https://rga-backend-jdbm.onrender.com/teams", {teamName: action.payload.teamName})
         } catch (error) {
           console.log(error)
         }
@@ -21,7 +21,7 @@ const teamReducer = (
       return addPlayer(action.payload.teamId, action.payload.playerName, action.payload.playerNumber)
     async function addPlayer(teamId, playerName, playerNumber) {
       try {
-        const res = axios.post("http://localhost:5000/teams/"+teamId, {teamId, name: playerName, number: playerNumber})
+        const res = axios.post("https://rga-backend-jdbm.onrender.com/teams/"+teamId, {teamId, name: playerName, number: playerNumber})
       } catch (error) {
         console.log(error)
       }
@@ -30,7 +30,7 @@ const teamReducer = (
       return editPlayer(action.payload.playerId, action.payload.updatedPlayerName, action.payload.updatedPlayerNumber);
       async function editPlayer(id, playerName, playerNumber) {
         try {
-          const res = axios.put("http://localhost:5000/teams/"+id,  {name: playerName, number: playerNumber})
+          const res = axios.put("https://rga-backend-jdbm.onrender.com/teams/"+id,  {name: playerName, number: playerNumber})
         } catch (error) {
           console.log(error)
         }
@@ -39,7 +39,7 @@ const teamReducer = (
       return deletePlayer(action.payload.team, action.payload.playerId);
       async function deletePlayer(team, playerId) {
         try {
-          const res = axios.delete("http://localhost:5000/teams/"+playerId)
+          const res = axios.delete("https://rga-backend-jdbm.onrender.com/teams/"+playerId)
         } catch (error) {
           console.log(error)
         }

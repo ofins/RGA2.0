@@ -13,7 +13,6 @@ function CreateModal(props) {
   const show = useSelector((state) => state.showModal);
   const handleClose = (num) => {
     dispatch(actions.closeModal(num));
-    console.log('close!')
   };
 
 

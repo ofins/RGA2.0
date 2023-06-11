@@ -224,7 +224,7 @@ function PostGame() {
 
     async function handleSaveGame(title, date, gameId) {
         try {
-            const res = await axios.post("http://localhost:5000/gamestats", {
+            const res = await axios.post("https://rga-backend-jdbm.onrender.com/gamestats", {
                 title: title,
                 date: date,
                 gameId: gameId,

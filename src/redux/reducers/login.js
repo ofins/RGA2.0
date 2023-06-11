@@ -1,4 +1,4 @@
-const initialState = {userName:'', password:'', isLoggedIn:true};
+const initialState = {userName:'', password:'', isLoggedIn:false};
 
 export default (state = initialState, { type, payload }) => {
     switch (type) {

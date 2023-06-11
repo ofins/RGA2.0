@@ -72,6 +72,11 @@ The stats page is organized by Home and Away team.
 Date of game is shown at the top left.
 Game ID is a unique ID generated for each game, shown at the top right.
 
+#### Authentication
+only Admin has permission to make changes to roster and game stats.
+To login, go to *Login* on the very right of the navbar. 
+Account: Admin
+Password: password
 
 ### Roadmap
 - [x] Show post game stats at the end
